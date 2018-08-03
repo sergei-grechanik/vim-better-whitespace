@@ -309,6 +309,9 @@ command! CurrentLineWhitespaceOn call <SID>CurrentLineWhitespaceOn()
 command! -range=% NextTrailingWhitespace call <SID>GotoTrailingWhitespace(0, <line1>, <line2>)
 command! -range=% PrevTrailingWhitespace call <SID>GotoTrailingWhitespace(1, <line1>, <line2>)
 
+command! BetterWSRehighlight call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
+
+
 if !empty(g:better_whitespace_operator)
     function! s:StripWhitespaceMotion(type)
         call <SID>StripWhitespace(line("'["), line("']"))
@@ -389,10 +392,10 @@ function! <SID>SetupAutoCommands()
                 " Check if current line highlighting is disabled
                 if g:current_line_whitespace_disabled_hard == 1
                     " Never highlight whitespace on current line
-                    autocmd InsertEnter,CursorMoved,CursorMovedI * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
+                    autocmd InsertEnter,CursorHold,CursorHoldI,InsertCharPre * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
                 else
                     " When in insert mode, do not highlight whitespace on the current line
-                    autocmd InsertEnter,CursorMovedI * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
+                    autocmd InsertEnter,CursorHoldI,InsertCharPre * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
                 endif
                 " Highlight all whitespace when exiting insert mode
                 autocmd InsertLeave,BufReadPost * call <SID>HighlightEOLWhitespace('match')
