@@ -392,10 +392,10 @@ function! <SID>SetupAutoCommands()
                 " Check if current line highlighting is disabled
                 if g:current_line_whitespace_disabled_hard == 1
                     " Never highlight whitespace on current line
-                    autocmd InsertEnter,CursorHold,CursorHoldI,InsertCharPre * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
+                    autocmd InsertEnter,CursorHold,CursorHoldI * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
                 else
                     " When in insert mode, do not highlight whitespace on the current line
-                    autocmd InsertEnter,CursorHoldI,InsertCharPre * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
+                    autocmd InsertEnter,CursorHoldI * call <SID>HighlightEOLWhitespaceExceptCurrentLine('match')
                 endif
                 " Highlight all whitespace when exiting insert mode
                 autocmd InsertLeave,BufReadPost * call <SID>HighlightEOLWhitespace('match')
