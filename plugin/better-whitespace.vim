@@ -365,11 +365,11 @@ function! s:HighlightEOLWhitespace(type)
 endfunction
 
 function! s:HighlightEOLWhitespaceExceptCurrentLine(type)
-    let a:exclude_current_line_eol_whitespace_pattern = '\%<' . line(".") .  'l' . s:eol_whitespace_pattern . '\|\%>' . line(".") .  'l' . s:eol_whitespace_pattern
+    let exclude_current_line_eol_whitespace_pattern = '\%<' . line(".") .  'l' . s:eol_whitespace_pattern . '\|\%>' . line(".") .  'l' . s:eol_whitespace_pattern
     if (a:type == 'match')
-        call s:PerformMatchHighlight(a:exclude_current_line_eol_whitespace_pattern)
+        call s:PerformMatchHighlight(exclude_current_line_eol_whitespace_pattern)
     elseif (a:type == 'syntax')
-        call s:PerformSyntaxHighlight(a:exclude_current_line_eol_whitespace_pattern)
+        call s:PerformSyntaxHighlight(exclude_current_line_eol_whitespace_pattern)
     endif
 endfunction
 
